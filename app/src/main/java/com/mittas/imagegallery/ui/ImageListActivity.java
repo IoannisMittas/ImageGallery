@@ -11,5 +11,12 @@ public class ImageListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_list);
+
+        if (savedInstanceState == null) {
+           ImageListFragment fragment = new ImageListFragment();
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, fragment, ImageListFragment.TAG).commit();
+        }
     }
 }
