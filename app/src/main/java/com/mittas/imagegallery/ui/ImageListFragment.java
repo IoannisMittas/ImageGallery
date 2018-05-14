@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -25,6 +26,7 @@ import com.mittas.imagegallery.R;
 import com.mittas.imagegallery.data.ImageModel;
 import com.mittas.imagegallery.viewmodel.ImageListViewModel;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,12 +74,12 @@ public class ImageListFragment extends Fragment {
 
         if (requestCode == FOLDER_PICKER_CODE) {
             if (resultCode == Activity.RESULT_OK && intent.hasExtra("data")) { // 3rd party library specification: selected folder variable name = data
-                String folderLocation = intent.getExtras().getString("data");
-                // TODO handle folderLocation
+                String folderPath= intent.getExtras().getString("data");
+                File imageFolder = new File(folderPath);
+                viewModel.onImageFolderSelected(imageFolder);
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // TODO handle cancellation
             }
-
         }
     }
 
@@ -100,10 +102,6 @@ public class ImageListFragment extends Fragment {
         viewModel.getAllImages().observe(this, images -> adapter.setImages(images));
     }
 
-    /**
-     * Write permission is required so that folder picker can create new folder.
-     * If you just want to pick files, Read permission is enough.
-     */
     void checkStoragePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(getActivity(),

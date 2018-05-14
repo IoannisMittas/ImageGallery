@@ -9,18 +9,22 @@ import android.support.annotation.NonNull;
 import com.mittas.imagegallery.BasicApp;
 import com.mittas.imagegallery.data.ImageModel;
 
+import java.io.File;
 import java.util.List;
 
 public class ImageListViewModel extends AndroidViewModel{
 
+    private BasicApp application;
     private final MediatorLiveData<List<ImageModel>> observableImages;
 
     public ImageListViewModel(@NonNull Application application) {
         super(application);
 
+        this.application = (BasicApp) application;
+
         observableImages = new MediatorLiveData<>();
 
-        LiveData<List<ImageModel>> images = ((BasicApp) application).getRepository()
+        LiveData<List<ImageModel>> images = this.application.getRepository()
                 .getAllImages();
 
         // observe the changes of the images from the database and forward them
@@ -32,5 +36,9 @@ public class ImageListViewModel extends AndroidViewModel{
      */
     public LiveData<List<ImageModel>> getAllImages() {
         return observableImages;
+    }
+
+    public void onImageFolderSelected(File imageFolder) {
+        application.getRepository().onImageFolderSelected(imageFolder);
     }
 }

@@ -3,9 +3,13 @@ package com.mittas.imagegallery;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.net.Uri;
 
 import com.mittas.imagegallery.data.ImageModel;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +40,26 @@ public class ImageRepository {
         return observableImages;
     }
 
-    public void addImages(final List<ImageModel> images) {
+    public void onImageFolderSelected(File imageFolder) {
+        // TODO remove if don't needed
+        //imageFolder.mkdirs();
+
+        File[] allImageFiles = imageFolder.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return (name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));
+            }
+        });
+
+        ArrayList<ImageModel> imageList = new ArrayList<>();
+        for (File imageFile: allImageFiles) {
+            Uri imageUri = Uri.fromFile(imageFile);
+            imageList.add(new ImageModel(imageUri));
+        }
+
+        addImages(imageList);
+    }
+
+    private void addImages(final List<ImageModel> images) {
         if(images != null) {
             executors.diskIO().execute(() -> setRepositoryImages(images));
         }
