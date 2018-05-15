@@ -2,23 +2,18 @@ package com.mittas.imagegallery.ui;
 
 import android.Manifest;
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +24,6 @@ import com.mittas.imagegallery.viewmodel.ImageListViewModel;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import lib.folderpicker.FolderPicker;
 
@@ -42,6 +36,14 @@ public class ImageListFragment extends Fragment {
     private ImageListViewModel viewModel;
     private ImageListAdapter adapter;
     private RecyclerView recyclerView;
+
+    private View.OnClickListener itemClickListener = view -> {
+        // Start ImageActivity
+        ImageModel image = (ImageModel) view.getTag();
+        Intent intent = new Intent(getActivity(), ImageActivity.class);
+        intent.putExtra(ImageModel.IMAGE_PARCEL, image);
+        startActivity(intent);
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -91,7 +93,7 @@ public class ImageListFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ImageListAdapter(getActivity(), new ArrayList<ImageModel>());
+        adapter = new ImageListAdapter(getActivity(), new ArrayList<ImageModel>(), itemClickListener);
         recyclerView.setAdapter(adapter);
     }
 

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.mittas.imagegallery.R;
 import com.mittas.imagegallery.data.ImageModel;
@@ -21,10 +20,12 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
     private Context context;
     private List<ImageModel> imageList;
+    private View.OnClickListener viewClickListener;
 
-    public ImageListAdapter(Context context, List<ImageModel> imageList) {
+    public ImageListAdapter(Context context, List<ImageModel> imageList, View.OnClickListener viewClickListener) {
         this.context = context;
         this.imageList = imageList;
+        this.viewClickListener = viewClickListener;
     }
 
     @NonNull
@@ -36,14 +37,19 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ImageModel image = imageList.get(position);
+
         RequestOptions requestOptions= new RequestOptions()
                 .override(200, 200);
 
-        Glide.with(context).load(imageList.get(position).getUri())
+        Glide.with(context).load(image.getUri())
                 .apply(requestOptions)
                 .transition(withCrossFade())
                 .thumbnail(0.5f)
                 .into(holder.imageView);
+
+        holder.itemView.setTag(image);
+        holder.itemView.setOnClickListener(viewClickListener);
     }
 
     @Override
