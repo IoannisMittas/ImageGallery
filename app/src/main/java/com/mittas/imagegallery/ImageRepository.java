@@ -19,10 +19,12 @@ public class ImageRepository {
     private static ImageRepository INSTANCE;
     private final AppExecutors executors;
     private MediatorLiveData<List<ImageModel>> observableImages;
-    private MutableLiveData<List<ImageModel>> repositoryImages = new MutableLiveData<>();
+    private MutableLiveData<List<ImageModel>> repositoryImages;
 
     private ImageRepository(final AppExecutors executors) {
         this.executors = executors;
+
+        repositoryImages = new MutableLiveData<>();
 
         observableImages = new MediatorLiveData<>();
         observableImages.addSource(this.repositoryImages,
@@ -41,9 +43,6 @@ public class ImageRepository {
     }
 
     public void onImageFolderSelected(File imageFolder) {
-        // TODO remove if don't needed
-        //imageFolder.mkdirs();
-
         File[] allImageFiles = imageFolder.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 return (name.endsWith(".jpg") || name.endsWith(".jpeg") || name.endsWith(".png"));

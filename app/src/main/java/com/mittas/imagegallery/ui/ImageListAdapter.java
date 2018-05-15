@@ -37,8 +37,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RequestOptions requestOptions= new RequestOptions()
-                .override(200, 200)
-                .diskCacheStrategy(DiskCacheStrategy.ALL);
+                .override(200, 200);
 
         Glide.with(context).load(imageList.get(position).getUri())
                 .apply(requestOptions)
