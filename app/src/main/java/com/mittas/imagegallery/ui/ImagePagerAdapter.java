@@ -18,8 +18,7 @@ public class ImagePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        // TODO
-        return null;
+        return ImageFragment.newInstance(imageList.get(position).getUri());
     }
 
     @Override
@@ -31,5 +30,12 @@ public class ImagePagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return (CharSequence) imageList.get(position).getUri();
+    }
+
+
+
+    public void setImages(List<ImageModel> imageList) {
+        this.imageList = imageList;
+        notifyDataSetChanged();
     }
 }

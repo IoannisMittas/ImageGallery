@@ -20,12 +20,16 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
     private Context context;
     private List<ImageModel> imageList;
-    private View.OnClickListener viewClickListener;
+    private OnItemClickListener listener;
 
-    public ImageListAdapter(Context context, List<ImageModel> imageList, View.OnClickListener viewClickListener) {
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public ImageListAdapter(Context context, List<ImageModel> imageList, OnItemClickListener listener) {
         this.context = context;
         this.imageList = imageList;
-        this.viewClickListener = viewClickListener;
+        this.listener = listener;
     }
 
     @NonNull
@@ -39,7 +43,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ImageModel image = imageList.get(position);
 
-        RequestOptions requestOptions= new RequestOptions()
+        RequestOptions requestOptions = new RequestOptions()
                 .override(200, 200);
 
         Glide.with(context).load(image.getUri())
@@ -48,13 +52,17 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
                 .thumbnail(0.5f)
                 .into(holder.imageView);
 
-        holder.itemView.setTag(image);
-        holder.itemView.setOnClickListener(viewClickListener);
+        holder.itemView.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onItemClick(v, position);
+            }
+        }));
     }
 
     @Override
     public int getItemCount() {
-       return imageList.size();
+        return imageList.size();
     }
 
     public void setImages(List<ImageModel> imageList) {

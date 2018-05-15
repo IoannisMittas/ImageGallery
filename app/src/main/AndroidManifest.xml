@@ -21,8 +21,7 @@
         </activity>
         <activity
             android:name=".ui.ImagePagerActivity"
-            android:label="@string/title_activity_image_pager"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".ui.ImageListActivity"></activity>
     </application>
 
 </manifest>

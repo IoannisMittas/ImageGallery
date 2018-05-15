@@ -1,6 +1,5 @@
 package com.mittas.imagegallery.ui;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,81 +11,35 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.mittas.imagegallery.R;
 
-
 public class ImageFragment extends Fragment {
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-
-        String name, url;
-        int pos;
-        private static final String ARG_SECTION_NUMBER = "section_number";
-        private static final String ARG_IMG_TITLE = "image_title";
-        private static final String ARG_IMG_URL = "image_url";
+        private static final String ARG_IMAGE_URI = "image_uri";
+        private Uri imageUri;
 
         @Override
         public void setArguments(Bundle args) {
             super.setArguments(args);
-            this.pos = args.getInt(ARG_SECTION_NUMBER);
-            this.name = args.getString(ARG_IMG_TITLE);
-            this.url = args.getString(ARG_IMG_URL);
+            this.imageUri = args.getParcelable(ARG_IMAGE_URI);
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber, String name, String url) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+        public static ImageFragment newInstance(Uri imageUri) {
+            ImageFragment fragment = new ImageFragment();
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            args.putString(ARG_IMG_TITLE, name);
-            args.putString(ARG_IMG_URL, url);
+            args.putParcelable(ARG_IMAGE_URI, imageUri);
             fragment.setArguments(args);
             return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public void onStart() {
-            super.onStart();
-
         }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_image, container, false);
 
-            final ImageView imageView = (ImageView) rootView.findViewById(R.id.detail_image);
+            final ImageView imageView = rootView.findViewById(R.id.imageview);
 
-            Glide.with(getActivity()).load(url).thumbnail(0.1f).into(imageView);
+            if (imageUri != null) {
+                Glide.with(getActivity()).load(imageUri).thumbnail(0.1f).into(imageView);
+            }
 
             return rootView;
         }
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}

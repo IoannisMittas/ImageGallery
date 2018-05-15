@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ import lib.folderpicker.FolderPicker;
 public class ImageListFragment extends Fragment {
     public static final String TAG = "ImageListFragment";
 
+    public static final String IMAGE_POSITION = "image_position";
+
     private static final int SDCARD_PERMISSION = 1;
     private static final int FOLDER_PICKER_CODE = 2;
 
@@ -37,11 +40,11 @@ public class ImageListFragment extends Fragment {
     private ImageListAdapter adapter;
     private RecyclerView recyclerView;
 
-    private View.OnClickListener itemClickListener = view -> {
+    private ImageListAdapter.OnItemClickListener itemClickListener = (view, position) -> {
         // Start ImageActivity
-        ImageModel image = (ImageModel) view.getTag();
         Intent intent = new Intent(getActivity(), ImagePagerActivity.class);
-        intent.putExtra(ImageModel.IMAGE_PARCEL, image);
+        intent.putExtra(IMAGE_POSITION, position);
+
         startActivity(intent);
     };
 
@@ -98,7 +101,6 @@ public class ImageListFragment extends Fragment {
     }
 
     private void subscribeUi() {
-        // Update the list when the data changes
         viewModel.getAllImages().observe(this, images -> adapter.setImages(images));
     }
 
