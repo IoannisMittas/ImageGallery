@@ -40,7 +40,7 @@ public class ImageListFragment extends Fragment {
     private View.OnClickListener itemClickListener = view -> {
         // Start ImageActivity
         ImageModel image = (ImageModel) view.getTag();
-        Intent intent = new Intent(getActivity(), ImageActivity.class);
+        Intent intent = new Intent(getActivity(), ImagePagerActivity.class);
         intent.putExtra(ImageModel.IMAGE_PARCEL, image);
         startActivity(intent);
     };
@@ -93,7 +93,7 @@ public class ImageListFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ImageListAdapter(getActivity(), new ArrayList<ImageModel>(), itemClickListener);
+        adapter = new ImageListAdapter(getActivity(), new ArrayList<>(), itemClickListener);
         recyclerView.setAdapter(adapter);
     }
 
