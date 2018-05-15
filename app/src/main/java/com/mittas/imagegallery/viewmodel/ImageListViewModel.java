@@ -13,18 +13,17 @@ import java.io.File;
 import java.util.List;
 
 public class ImageListViewModel extends AndroidViewModel{
-
-    private BasicApp application;
+    private Application application;
     private final MediatorLiveData<List<ImageModel>> observableImages;
 
     public ImageListViewModel(@NonNull Application application) {
         super(application);
 
-        this.application = (BasicApp) application;
+        this.application = application;
 
         observableImages = new MediatorLiveData<>();
 
-        LiveData<List<ImageModel>> images = this.application.getRepository()
+        LiveData<List<ImageModel>> images = ((BasicApp) this.application).getRepository()
                 .getAllImages();
 
         // observe the changes of the images from the database and forward them
@@ -39,6 +38,6 @@ public class ImageListViewModel extends AndroidViewModel{
     }
 
     public void onImageFolderSelected(File imageFolder) {
-        application.getRepository().onImageFolderSelected(imageFolder);
+        ((BasicApp) application).getRepository().onImageFolderSelected(imageFolder);
     }
 }

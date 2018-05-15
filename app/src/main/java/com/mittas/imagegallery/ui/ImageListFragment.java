@@ -66,6 +66,7 @@ public class ImageListFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(ImageListViewModel.class);
         subscribeUi();
+
     }
 
     @Override
@@ -93,7 +94,7 @@ public class ImageListFragment extends Fragment {
                 layoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        adapter = new ImageListAdapter(new ArrayList<ImageModel>());
+        adapter = new ImageListAdapter(getActivity(), new ArrayList<ImageModel>());
         recyclerView.setAdapter(adapter);
     }
 

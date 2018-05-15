@@ -3,13 +3,13 @@ package com.mittas.imagegallery.data;
 import android.net.Uri;
 
 public class ImageModel {
-    private Uri imageUri;
+    private Uri uri;
 
     public ImageModel(Uri imageUri) {
-        this.imageUri = imageUri;
+        this.uri = imageUri;
     }
 
-    public Uri getImageUri() {
-        return imageUri;
+    public Uri getUri() {
+        return uri;
     }
 }

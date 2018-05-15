@@ -19,7 +19,7 @@ public class ImageRepository {
     private static ImageRepository INSTANCE;
     private final AppExecutors executors;
     private MediatorLiveData<List<ImageModel>> observableImages;
-    private MutableLiveData<List<ImageModel>> repositoryImages;
+    private MutableLiveData<List<ImageModel>> repositoryImages = new MutableLiveData<>();
 
     private ImageRepository(final AppExecutors executors) {
         this.executors = executors;
