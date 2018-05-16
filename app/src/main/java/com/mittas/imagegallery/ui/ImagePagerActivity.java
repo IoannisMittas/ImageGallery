@@ -68,7 +68,6 @@ public class ImagePagerActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }

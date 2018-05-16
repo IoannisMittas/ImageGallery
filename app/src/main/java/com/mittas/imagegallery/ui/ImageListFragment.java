@@ -85,7 +85,7 @@ public class ImageListFragment extends Fragment {
                 File imageFolder = new File(folderPath);
                 viewModel.onImageFolderSelected(imageFolder);
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                // TODO handle cancellation
+                // do nothing
             }
         }
     }

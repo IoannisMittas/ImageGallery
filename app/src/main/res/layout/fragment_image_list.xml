@@ -18,6 +18,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="end"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/baseline_folder_white_24" />
 
 </FrameLayout>
