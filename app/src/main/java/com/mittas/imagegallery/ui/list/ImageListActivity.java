@@ -1,4 +1,4 @@
-package com.mittas.imagegallery.ui;
+package com.mittas.imagegallery.ui.list;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

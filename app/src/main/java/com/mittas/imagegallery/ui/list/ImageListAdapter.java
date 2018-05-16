@@ -1,4 +1,4 @@
-package com.mittas.imagegallery.ui;
+package com.mittas.imagegallery.ui.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

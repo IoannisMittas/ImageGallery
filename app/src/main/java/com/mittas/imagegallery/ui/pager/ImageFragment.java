@@ -1,4 +1,4 @@
-package com.mittas.imagegallery.ui;
+package com.mittas.imagegallery.ui.pager;
 
 import android.net.Uri;
 import android.os.Bundle;

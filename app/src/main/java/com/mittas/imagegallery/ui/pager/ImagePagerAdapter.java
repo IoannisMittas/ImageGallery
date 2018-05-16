@@ -1,4 +1,4 @@
-package com.mittas.imagegallery.ui;
+package com.mittas.imagegallery.ui.pager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

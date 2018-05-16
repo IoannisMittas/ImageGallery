@@ -1,4 +1,4 @@
-package com.mittas.imagegallery.ui;
+package com.mittas.imagegallery.ui.list;
 
 import android.Manifest;
 import android.app.Activity;
@@ -14,13 +14,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mittas.imagegallery.R;
-import com.mittas.imagegallery.data.ImageModel;
+import com.mittas.imagegallery.ui.pager.ImagePagerActivity;
 import com.mittas.imagegallery.viewmodel.ImageListViewModel;
 
 import java.io.File;

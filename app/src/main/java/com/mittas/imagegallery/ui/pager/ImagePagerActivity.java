@@ -1,4 +1,4 @@
-package com.mittas.imagegallery.ui;
+package com.mittas.imagegallery.ui.pager;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Handler;
@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import com.mittas.imagegallery.R;
+import com.mittas.imagegallery.ui.list.ImageListFragment;
 import com.mittas.imagegallery.viewmodel.ImagePagerViewModel;
 
 import java.util.ArrayList;

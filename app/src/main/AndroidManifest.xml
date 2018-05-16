@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ImageListActivity">
+        <activity android:name=".ui.list.ImageListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ImagePagerActivity"
-            android:parentActivityName=".ui.ImageListActivity"></activity>
+            android:name=".ui.pager.ImagePagerActivity"
+            android:parentActivityName=".ui.list.ImageListActivity"></activity>
     </application>
 
 </manifest>

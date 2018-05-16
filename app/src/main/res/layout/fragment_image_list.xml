@@ -19,5 +19,4 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchorGravity="end"
         app:srcCompat="@drawable/baseline_folder_white_24" />
-
 </FrameLayout>
