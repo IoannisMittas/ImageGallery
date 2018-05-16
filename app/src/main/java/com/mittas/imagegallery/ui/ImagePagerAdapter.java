@@ -26,13 +26,10 @@ public class ImagePagerAdapter extends FragmentPagerAdapter {
         return imageList.size();
     }
 
-    // TODO: if title doesn't show right, change this
     @Override
     public CharSequence getPageTitle(int position) {
-        return (CharSequence) imageList.get(position).getUri();
+        return imageList.get(position).getUri().toString();
     }
-
-
 
     public void setImages(List<ImageModel> imageList) {
         this.imageList = imageList;

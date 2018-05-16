@@ -54,5 +54,22 @@ public class ImagePagerActivity extends AppCompatActivity {
             // if we doesn't call viewPager with a Handler, it doesn't work
             new Handler().post(() -> viewPager.setCurrentItem(currentImagePosition));
         }
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //noinspection ConstantConditions
+                setTitle(adapter.getPageTitle(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
