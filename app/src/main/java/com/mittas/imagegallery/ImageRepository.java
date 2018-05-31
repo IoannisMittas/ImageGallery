@@ -72,6 +72,4 @@ public class ImageRepository {
     private void setRepositoryImages(final List<ImageModel> images) {
         repositoryImages.postValue(images);
     }
-
-
 }

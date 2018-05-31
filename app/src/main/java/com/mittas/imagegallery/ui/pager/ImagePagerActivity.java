@@ -23,7 +23,6 @@ public class ImagePagerActivity extends AppCompatActivity {
      */
     private ViewPager viewPager;
 
-    // TODO fix activity_image_pager
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
